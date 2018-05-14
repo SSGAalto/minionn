@@ -1,0 +1,27 @@
+# Prevent key leaks
+assets/*
+*.pkey
+*.skey
+
+# Unnecessary generated onnx files in tools
+tools/*.onnx
+tools/*.tensor
+ 
+# SEAL library
+lib/SEAL/*
+
+#binaries
+lib/bin/*.a
+
+# Temporary objects
+*.o
+*.d
+**.cppimporthash
+**/.rendered*
+**/*.cpython-35*
+**/__pycache__/
+
+# Workspace objects
+*.code-workspace
+**/.vscode/*
+

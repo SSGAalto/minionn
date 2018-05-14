@@ -1,0 +1,61 @@
+/*
+Author: Fritz Alder
+Copyright: 
+Secure Systems Group, Aalto University 
+https://ssg.aalto.fi/
+
+This code is released under Apache 2.0 license
+http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+
+syntax = "proto3";
+
+import "onnx.proto";
+
+package minionn;
+
+// The service definition.
+service MinioNN {
+  // Precomputation service - requests ONNX format, ~w
+  rpc Precomputation(PrecomputationRequest) returns (PrecomputationResponse) {}
+
+  // Computation message - sends ~u and x_s and receives y_s
+  rpc Computation(ComputationRequest) returns (ComputationResponse) {}
+}
+
+/*
+ * Precomputation:
+ *  Input(message view): Nothing
+ *  Output: ONNX model for client and encrypted w
+ */
+// The request for the precomputation data of the Server
+// Technically, this is only required once per connection
+message PrecomputationRequest {
+  bool request_model = 1;
+  bool request_w = 2;
+}
+
+// The response sent by the Server
+// Contains the onnx model and/or the precomputed SIMD ~w
+message PrecomputationResponse{
+  onnx.ModelProto model = 1;
+  repeated bytes w = 2;
+}
+
+
+/*
+ * Computation:
+ *  Input: x_s, encrypted U
+ *  Output: y_s
+ */
+// The request message containing the client's u and x_s
+message ComputationRequest {
+  repeated bytes u = 1;
+  repeated int64 xs = 2;
+}
+
+// The response message containing y_s
+message ComputationResponse {
+  repeated int64 ys = 1;
+}
