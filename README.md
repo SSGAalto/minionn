@@ -42,8 +42,12 @@ Next, run the test_mpc_server.py and then the test_mpc_client.py in a second ter
 
 # Usage
 There are three models given in the models folder. All three take the S.tensor as input:
-Server: python3 server.py -i models/S.onnx
-Client: python3 client.py -i models/S.tensor -o models.out.txt
+```bash
+# Server: 
+python3 server.py -i models/S.onnx
+# Client: 
+python3 client.py -i models/S.tensor -o models.out.txt
+```
 
 You can test and verify the correctness of the three models with the given scripts in the models folder.
 ```bash
