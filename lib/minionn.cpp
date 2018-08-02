@@ -4,7 +4,7 @@ setup_pybind11(cfg)
 cfg['dependencies'] = ['minionnCommon.h','minionnMath.h', 'minionnCrypto.h', 'minionnABY.h']
 cfg['libraries'] = [
     #SEAL library
-    'bin/seal',
+    'seal',
     #Aby library
     'bin/aby',
     #Utilities required for ABY and Miracl
@@ -18,7 +18,7 @@ cfg['sources'] = [
 ]
 cfg['include_dirs'] = ['SEAL', 'ABY/src/abycore', '/usr/lib']
 cfg['parallel'] = True
-cfg['compiler_args'] = ['-std=c++11']
+cfg['compiler_args'] = ['-std=c++17']
 %>
 */
 

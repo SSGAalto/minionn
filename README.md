@@ -19,14 +19,27 @@ make all
 ```
 
 ## SEAL
-Download SEAL (MiniONN is developed for Seal v2.3.0-4):
+Download SEAL (MiniONN is tested for Seal v2.3.1), and place its SEAL subdirectory in libs (so that libs/SEAL contains the seal subdirectory).
 https://www.microsoft.com/en-us/research/project/simple-encrypted-arithmetic-library/
-Extract SEAL into the libs/SEAL directory and build it with the -fPIC flag:
+
+You now need to install SEAL with position independent code! Do this by adding the following line to the fie CMakeLists.txt before running CMake:
+```
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+```
+
+Now, install SEAL as instructed in the INSTALL.txt:
 ```bash
 cd SEAL
-export CXX="g++ -fPIC"
-./configure
+cmake .
 make
+sudo make install 
+```
+
+NOTE: If you prefer to not install SEAL globally, or do not want to install a global version with position independent code, you can instruct MiniONN to use a local SEAL library. For this, update the minionn.cpp file as follows:
+```python
+cfg['libraries'] = [
+    #SEAL library
+    'seal', # Change the path to the SEAL file here
 ```
 
 ## Veryfying the installation
