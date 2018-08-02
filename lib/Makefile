@@ -7,6 +7,9 @@ SRC=ABY/src
 CORE=${SRC}/abycore
 ARCHIVE_FILE=libaby.a
 
+# Create bin dir
+$(shell  mkdir -p $(BIN))
+
 # all source files and corresponding object files in abycore
 SOURCES_CORE := $(shell find ${CORE} -type f -name '*.cpp' -not -path '*/ENCRYPTO_utils/miracl_lib/*' -not -path '*/ENCRYPTO_utils/Miracl/*' -not -path '*/ot/external/*')
 OBJECTS_CORE := $(SOURCES_CORE:.cpp=.o)
@@ -95,3 +98,4 @@ clean:
 
 cleanall: clean
 	rm -f ${BIN}/*.a
+	rmdir --ignore-fail-on-non-empty $(BIN)
