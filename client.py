@@ -134,6 +134,7 @@ def main():
     """
     Use w to generate u and xs
     """
+    start_time = time.time()
     w_list = handler.get_w_list()
     encU = minionn_helper.client_precomputation(server_w, config.SLOTS, w_list)
 
@@ -183,7 +184,8 @@ def main():
 
     result = minionn_helper.vector_add(result_client, result_server)
     logger.info("Overall result is: " + str(list(result)))
-
+    finish_time = time.time()
+    logger.info("Processing took " + str(finish_time - start_time) + " seconds.")
 
     # Output to file if requested
     if args.output:
